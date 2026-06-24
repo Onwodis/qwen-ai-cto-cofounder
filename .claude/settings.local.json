@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(Get-WmiObject -Class Win32_LogicalDisk -Filter \"DeviceID='C:'\" | Select-Object FreeSpace, Size | ForEach-Object { \"Free: $\\([math]::Round\\($_.FreeSpace/1GB, 2\\)\\) GB / Total: $\\([math]::Round\\($_.Size/1GB, 2\\)\\) GB\" })"
+      "PowerShell(Get-WmiObject -Class Win32_LogicalDisk -Filter \"DeviceID='C:'\" | Select-Object FreeSpace, Size | ForEach-Object { \"Free: $\\([math]::Round\\($_.FreeSpace/1GB, 2\\)\\) GB / Total: $\\([math]::Round\\($_.Size/1GB, 2\\)\\) GB\" })",
+      "Bash(mkdir -p \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\types\" \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\constants\" \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\hooks\" \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\lib\" \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\components\\\\auth\" \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\components\\\\chat\" \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\components\\\\canvas\" \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\components\\\\sidebar\" \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\components\\\\managers\" \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\components\\\\ui\" \"c:\\\\Users\\\\1030G2\\\\Documents\\\\nextjs\\\\cto\\\\app\\\\api\\\\chat\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\1030G2\\Documents\\nextjs\\cto\\app"
     ]
   }
 }

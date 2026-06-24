@@ -17,7 +17,7 @@ export interface VectorStore {
 }
 
 // --- QWEN CLIENT (Alibaba Cloud DashScope, OpenAI-compatible) ---
-const getQwenClient = (): OpenAI => {
+export const getQwenClient = (): OpenAI => {
   const apiKey = process.env.QWEN_API_KEY;
   if (!apiKey) throw new Error('QWEN_API_KEY is unconfigured. Get your key at https://dashscope.console.aliyun.com/');
   const baseURL = process.env.QWEN_OPENAI_ENDPOINT || 'https://dashscope.aliyuncs.com/compatible-mode/v1';
@@ -126,6 +126,40 @@ export const KNOWLEDGE_BASE = [
 
 export const store = createVectorStore();
 store.bootstrap(KNOWLEDGE_BASE).catch((err) => console.error('VectorStore Bootstrap Failed:', err));
+
+// --- DIRECT CHAT (custom system prompt, no RAG) ---
+export async function directChat(
+  systemPrompt: string,
+  history: ChatMessage[],
+  userMessage: string,
+  thinkingMode = false
+): Promise<string> {
+  const qwen = getQwenClient();
+  const model = process.env.QWEN_MODEL || 'qwen-plus';
+
+  const stream = await qwen.chat.completions.create({
+    model,
+    messages: [
+      { role: 'system' as const, content: systemPrompt },
+      ...history.map(msg => ({
+        role: (msg.role === 'system' || msg.role === 'assistant' || msg.role === 'user')
+          ? msg.role
+          : 'user' as const,
+        content: msg.content || '',
+      })),
+      { role: 'user' as const, content: userMessage },
+    ],
+    stream: true as const,
+    extra_body: { enable_thinking: thinkingMode },
+  } as OpenAI.Chat.ChatCompletionCreateParamsStreaming);
+
+  let result = '';
+  for await (const chunk of stream) {
+    result += chunk.choices[0]?.delta?.content || '';
+  }
+
+  return result.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+}
 
 // --- MAIN CHAT SERVICE ---
 export async function ragChat(
