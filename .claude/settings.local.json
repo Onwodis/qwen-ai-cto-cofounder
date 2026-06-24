@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-WmiObject -Class Win32_LogicalDisk -Filter \"DeviceID='C:'\" | Select-Object FreeSpace, Size | ForEach-Object { \"Free: $\\([math]::Round\\($_.FreeSpace/1GB, 2\\)\\) GB / Total: $\\([math]::Round\\($_.Size/1GB, 2\\)\\) GB\" })"
+    ]
+  }
+}
