@@ -198,6 +198,25 @@ export default function CtoWorkspace() {
     session.setDevReport(null);
   };
 
+  const handleDeleteSession = async (sid: string) => {
+    await session.deleteSession(sid);
+    // If deleting the active session, start a fresh one
+    if (sid === session.sessionIdRef.current) {
+      chat.clearMessages();
+      session.createNewSession();
+      session.setManagementReport(null);
+      session.setDevReport(null);
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    chat.clearMessages();
+    await session.deleteAllSessions();
+    session.createNewSession();
+    session.setManagementReport(null);
+    session.setDevReport(null);
+  };
+
   if (!founderName) return <AuthGate onLogin={handleLogin} />;
 
   // Dynamic status bar — reflects active mode's managers
@@ -245,6 +264,7 @@ export default function CtoWorkspace() {
       report={activeReport}
       perspective={chat.perspective}
       logs={session.logs}
+      messages={chat.messages}
       isUnlocked={chat.messages.length > 0}
       productName={session.productName}
       founderName={founderName}
@@ -261,6 +281,8 @@ export default function CtoWorkspace() {
       onSelect={handleSelectSession}
       onNew={handleNewSession}
       onLogout={handleLogout}
+      onDelete={handleDeleteSession}
+      onDeleteAll={handleDeleteAll}
     />
   );
 
@@ -403,7 +425,7 @@ export default function CtoWorkspace() {
                   <FiTerminal className="animate-pulse" />
                   <span className="font-bold font-mono text-sm">SYSTEM HELP</span>
                 </div>
-                <button onClick={() => setShowHelp(false)} className="p-1.5 rounded-lg hover:bg-zinc-900 text-zinc-500 hover:text-zinc-300">
+                <button onClick={() => setShowHelp(false)} className="cursor-pointer p-1.5 rounded-lg hover:bg-zinc-900 text-zinc-500 hover:text-zinc-300">
                   <FiMinimize2 size={14} />
                 </button>
               </div>
@@ -437,7 +459,7 @@ export default function CtoWorkspace() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSidebarOpen(false)}
-              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm xl:hidden"
+              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm xl:hidden cursor-pointer"
             />
             <motion.div
               initial={{ x: -280 }}
@@ -523,7 +545,7 @@ export default function CtoWorkspace() {
             <button
               key={key}
               onClick={() => setMobilePanel(key)}
-              className={`flex-1 flex flex-col items-center gap-1 py-3 transition-colors ${mobilePanel === key ? (isMgmtMode ? 'text-violet-400' : 'text-indigo-400') : isDark ? 'text-zinc-600' : 'text-zinc-400'}`}
+              className={`cursor-pointer flex-1 flex flex-col items-center gap-1 py-3 transition-colors ${mobilePanel === key ? (isMgmtMode ? 'text-violet-400' : 'text-indigo-400') : isDark ? 'text-zinc-600' : 'text-zinc-400'}`}
             >
               {icon}
               <span className="text-[10px] font-mono">{label}</span>

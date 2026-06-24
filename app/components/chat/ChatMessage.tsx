@@ -114,7 +114,7 @@ export function ChatMessage({ message, founderName, isDark, perspective, copiedI
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => onReply(message)}
-            className={`p-1 rounded-lg text-[9px] font-mono flex items-center gap-1 ${isDark ? 'text-zinc-600 hover:text-zinc-300 hover:bg-zinc-800' : 'text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200'}`}
+            className={`cursor-pointer p-1 rounded-lg text-[9px] font-mono flex items-center gap-1 ${isDark ? 'text-zinc-600 hover:text-zinc-300 hover:bg-zinc-800' : 'text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200'}`}
           >
             <FiCornerUpLeft size={10} />
             <span>Reply</span>
@@ -123,7 +123,7 @@ export function ChatMessage({ message, founderName, isDark, perspective, copiedI
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => onCopy(message)}
-            className={`p-1 rounded-lg text-[9px] font-mono flex items-center gap-1 ${isDark ? 'text-zinc-600 hover:text-zinc-300 hover:bg-zinc-800' : 'text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200'}`}
+            className={`cursor-pointer p-1 rounded-lg text-[9px] font-mono flex items-center gap-1 ${isDark ? 'text-zinc-600 hover:text-zinc-300 hover:bg-zinc-800' : 'text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200'}`}
           >
             {copiedId === message.id
               ? <FiCheck size={10} className="text-emerald-400" />

@@ -56,7 +56,7 @@ export function ChatInput({
                 {replyingTo.content.slice(0, 80)}{replyingTo.content.length > 80 ? '…' : ''}
               </p>
             </div>
-            <button onClick={onCancelReply} className="shrink-0 p-0.5 rounded hover:text-red-400 transition-colors">
+            <button onClick={onCancelReply} className="shrink-0 p-0.5 rounded hover:text-red-400 transition-colors cursor-pointer">
               <FiX size={11} />
             </button>
           </motion.div>
@@ -113,7 +113,7 @@ export function ChatInput({
               className={`flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-xs font-bold transition-all ${
                 isLoading || !value.trim()
                   ? isDark ? 'bg-zinc-800 text-zinc-600 cursor-not-allowed' : 'bg-zinc-200 text-zinc-400 cursor-not-allowed'
-                  : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-lg shadow-indigo-600/20'
+                  : 'cursor-pointer bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-lg shadow-indigo-600/20'
               }`}
             >
               {isLoading

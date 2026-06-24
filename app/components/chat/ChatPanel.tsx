@@ -82,7 +82,7 @@ export function ChatPanel({
           <div className={`flex items-center p-0.5 rounded-lg border ${isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-zinc-100 border-zinc-200'}`}>
             {(['developer', 'management'] as Perspective[]).map(p => (
               <motion.button key={p} onClick={() => onPerspectiveChange(p)} whileTap={{ scale: 0.95 }}
-                className={`px-2.5 py-1 rounded-md text-[9px] font-mono font-bold transition-all ${
+                className={`cursor-pointer px-2.5 py-1 rounded-md text-[9px] font-mono font-bold transition-all ${
                   perspective === p
                     ? p === 'developer'
                       ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20'
@@ -105,7 +105,7 @@ export function ChatPanel({
         {/* Product name + thinking mode */}
         <div className="flex items-center gap-2 shrink-0">
           <button onClick={onThinkingModeToggle}
-            className={`px-2 py-1 rounded-lg text-[9px] font-mono font-bold transition-all ${
+            className={`cursor-pointer px-2 py-1 rounded-lg text-[9px] font-mono font-bold transition-all ${
               thinkingMode
                 ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
                 : isDark ? 'bg-zinc-900 border border-zinc-800 text-zinc-600' : 'bg-zinc-100 border border-zinc-200 text-zinc-400'
@@ -139,7 +139,7 @@ export function ChatPanel({
 
       {/* ── Live cross-talk bar ── */}
       <AnimatePresence>
-        {isLoading && typingManagers.length === 0 && (
+        {isLoading && typingManagers.length > 1 && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}

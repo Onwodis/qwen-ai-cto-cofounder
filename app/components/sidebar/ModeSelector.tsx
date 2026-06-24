@@ -33,7 +33,7 @@ export function ModeSelector({
             onClick={() => handleModeChange(cm.id)}
             whileTap={{ scale: 0.95 }}
             title={cm.description}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-mono font-bold whitespace-nowrap transition-all shrink-0 ${
+            className={`cursor-pointer flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-mono font-bold whitespace-nowrap transition-all shrink-0 ${
               activeMode === cm.id
                 ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20'
                 : isDark
@@ -82,7 +82,7 @@ export function ModeSelector({
                       onManagerChange(m.key);
                       setShowManagerPicker(false);
                     }}
-                    className={`flex items-center gap-2 p-2 rounded-lg border text-left transition-all ${
+                    className={`cursor-pointer flex items-center gap-2 p-2 rounded-lg border text-left transition-all ${
                       selectedManager === m.key
                         ? `${m.darkBg} ${m.darkBorder} ring-1 ${m.ringColor}`
                         : isDark ? 'bg-zinc-900 border-zinc-800 hover:border-zinc-700' : 'bg-white border-zinc-200 hover:border-zinc-300'

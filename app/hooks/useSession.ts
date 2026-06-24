@@ -32,6 +32,8 @@ interface UseSessionReturn {
   } | null>;
   createNewSession: () => string;
   clearCurrentSession: (sessionId: string) => Promise<void>;
+  deleteSession: (sessionId: string) => Promise<void>;
+  deleteAllSessions: () => Promise<void>;
   loadSessionsList: () => void;
   setLogs: React.Dispatch<React.SetStateAction<string[]>>;
 }
@@ -158,6 +160,31 @@ export function useSession(_founderName: string | null): UseSessionReturn {
     return sid;
   }, []);
 
+  const deleteSession = useCallback(async (sid: string) => {
+    await Promise.allSettled([
+      fetch(`/api/history?sessionId=${sid}`, { method: 'DELETE' }),
+      fetch(`/api/meta?sessionId=${sid}`, { method: 'DELETE' }),
+    ]);
+    setSessions(prev => {
+      const updated = prev.filter(s => s.id !== sid);
+      try { localStorage.setItem(SESSIONS_STORAGE_KEY, JSON.stringify(updated)); } catch {}
+      return updated;
+    });
+  }, []);
+
+  const deleteAllSessions = useCallback(async () => {
+    setSessions(prev => {
+      Promise.allSettled(
+        prev.flatMap(s => [
+          fetch(`/api/history?sessionId=${s.id}`, { method: 'DELETE' }),
+          fetch(`/api/meta?sessionId=${s.id}`, { method: 'DELETE' }),
+        ])
+      ).catch(() => {});
+      try { localStorage.removeItem(SESSIONS_STORAGE_KEY); } catch {}
+      return [];
+    });
+  }, []);
+
   const clearCurrentSession = useCallback(async (sid: string) => {
     setManagementReport(null);
     setDevReport(null);
@@ -187,6 +214,8 @@ export function useSession(_founderName: string | null): UseSessionReturn {
     switchSession,
     createNewSession,
     clearCurrentSession,
+    deleteSession,
+    deleteAllSessions,
     loadSessionsList,
     setLogs,
   };

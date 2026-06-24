@@ -102,7 +102,7 @@ export function AuthGate({ onLogin }: AuthGateProps) {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleSubmit}
-              className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-mono text-sm font-bold rounded-xl flex items-center justify-center gap-2.5 shadow-lg shadow-indigo-600/20 transition-all"
+              className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-mono text-sm font-bold rounded-xl flex items-center justify-center gap-2.5 shadow-lg shadow-indigo-600/20 transition-all cursor-pointer"
             >
               <FiZap size={15} />
               <span>Enter the War Room</span>

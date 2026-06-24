@@ -50,7 +50,7 @@ function inlineFormat(text: string): React.ReactNode[] {
     if (p.startsWith('http'))
       return (
         <a key={i} href={p} target="_blank" rel="noopener noreferrer"
-          className="underline text-indigo-400 hover:text-indigo-300 break-all">
+          className="cursor-pointer underline text-indigo-400 hover:text-indigo-300 break-all">
           {p.replace(/^https?:\/\/(www\.)?/, '').slice(0, 40)}…
         </a>
       );
@@ -235,7 +235,7 @@ function TokenRenderer({ token, isDark }: { token: RichToken; isDark: boolean })
     case 'link':
       return (
         <motion.a variants={fadeUp} href={token.url} target="_blank" rel="noopener noreferrer"
-          className={`flex items-center gap-2 my-1.5 px-3 py-2 rounded-xl border text-xs font-semibold ${isDark ? 'bg-white/[0.02] border-white/10 text-indigo-400 hover:bg-white/[0.06]' : 'bg-zinc-100 border-zinc-200 text-indigo-600 hover:bg-zinc-200'}`}>
+          className={`cursor-pointer flex items-center gap-2 my-1.5 px-3 py-2 rounded-xl border text-xs font-semibold ${isDark ? 'bg-white/[0.02] border-white/10 text-indigo-400 hover:bg-white/[0.06]' : 'bg-zinc-100 border-zinc-200 text-indigo-600 hover:bg-zinc-200'}`}>
           <FiExternalLink size={10} />
           <span>{token.label}</span>
         </motion.a>

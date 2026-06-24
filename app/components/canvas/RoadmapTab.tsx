@@ -100,7 +100,7 @@ export function RoadmapTab({ report, isDark }: RoadmapTabProps) {
                 <span className="ml-1.5 text-[8px] font-mono opacity-40">{profile.title}</span>
               </div>
             </div>
-            <RichMessage content={report.agentsFeedback[field]} isDark={isDark} />
+            <RichMessage content={report.agentsFeedback[field] ?? ''} isDark={isDark} />
           </motion.div>
         );
       })}

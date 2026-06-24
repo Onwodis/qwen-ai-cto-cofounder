@@ -25,7 +25,7 @@ export function ManagerCard({ managerKey, isDark }: ManagerCardProps) {
       {/* Header row — click to expand */}
       <button
         onClick={() => setExpanded(e => !e)}
-        className={`w-full flex items-center gap-2 px-3 py-2 text-left transition-colors ${isDark ? 'hover:bg-white/[0.03]' : 'hover:bg-zinc-100'}`}
+        className={`cursor-pointer w-full flex items-center gap-2 px-3 py-2 text-left transition-colors ${isDark ? 'hover:bg-white/[0.03]' : 'hover:bg-zinc-100'}`}
       >
         <div className={`w-6 h-6 rounded-md ${profile.avatarColor} flex items-center justify-center text-white text-[9px] font-bold font-mono ring-1 ${profile.ringColor}`}>
           {profile.initials}

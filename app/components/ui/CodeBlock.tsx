@@ -35,7 +35,7 @@ export function CodeBlock({ title, code, isDark }: CodeBlockProps) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleCopy}
-          className={`text-xs px-2.5 py-1 rounded-lg font-mono transition-all flex items-center gap-1.5 ${
+          className={`cursor-pointer text-xs px-2.5 py-1 rounded-lg font-mono transition-all flex items-center gap-1.5 ${
             copied
               ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
               : isDark
