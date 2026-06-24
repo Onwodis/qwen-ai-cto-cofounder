@@ -100,10 +100,24 @@ export function CanvasPanel({
   const tabs = perspective === 'management' ? MGMT_TABS : DEV_TABS;
 
   const handleDownloadPDF = async () => {
+    // 1. Guard against null
+    if (!report) {
+      console.error('Cannot generate PDF: No report data available.');
+      return;
+    }
+
     setPdfLoading(true);
     try {
       const { downloadPDF } = await import('@/app/lib/pdf');
-      await downloadPDF(report, productName, founderName, messages, logs, perspective);
+      // 2. Because of the check above, TypeScript now knows 'report' is 'StructuredReport'
+      await downloadPDF(
+        report,
+        productName,
+        founderName,
+        messages,
+        logs,
+        perspective
+      );
     } catch (err) {
       console.error('PDF generation failed:', err);
     } finally {
